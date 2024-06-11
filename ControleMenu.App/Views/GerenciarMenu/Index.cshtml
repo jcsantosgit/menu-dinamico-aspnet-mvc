@@ -1,0 +1,109 @@
+﻿@model List<ControleMenu.App.Models.MenuViewModel>
+
+
+@if(TempData["mensagem"] != null)
+{
+    <input type="hidden" id="mensagem" value='@TempData["mensagem"]' />
+}
+else 
+{
+    <input type="hidden" id="mensagem" value="" />        
+}
+
+<div style="display:flex; flex-direction:row; justify-content: space-between; padding: 8px 0">
+    <div>
+        <h4>Menus Cadastrados</h4>
+    </div>
+    <div style="text-align: right;">
+        <a href='@Url.Action("Cadastrar","GerenciarMenu")' class="btn btn-info" style="display:inline-block">Novo</a>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Acao</th>
+            <th>Controlador</th>
+            <th>ID Pai</th>
+            <th>
+                Opções
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Nome</td>
+                    <td>@item.Acao</td>
+                    <td>@item.Controlador</td>
+                    <td>@item.IdPai</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target='@string.Format("#myModal{0}", item.Id)'>
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                        <div class="modal" id='@string.Format("myModal{0}", item.Id)'>
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Atenção!</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        Deseja realmente excluir o item <strong>@item.Nome</strong>?
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                                        <form action='@Url.Action("Remover","GerenciarMenu")' method="post">
+                                            <input name="id" type="hidden" value="@item.Id" />
+                                            <button type="submit" class="btn btn-danger">Sim</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+
+        <div class="toast mt-3">
+            <div class="toast-header">
+                Aviso
+            </div>
+            <div class="toast-body">
+                Cadastro realizado com sucesso
+            </div>
+        </div>
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var mensagem = document.querySelector('#mensagem').value;
+            if (mensagem != null && mensagem != undefined && mensagem.length > 0) {
+                $.toast({
+                    heading: 'Informação',
+                    text: mensagem,
+                    icon: 'info',
+                    loader: true,        // Change it to false to disable loader
+                    loaderBg: '#9EC600',  // To change the background
+                    position: 'top-left',
+                })
+            }
+        });
+    </script>
+}

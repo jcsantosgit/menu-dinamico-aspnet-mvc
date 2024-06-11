@@ -1,0 +1,25 @@
+﻿@model List<ControleMenu.App.Models.MenuViewModel>
+
+@if (Model != null)
+{
+    foreach (var menu in Model)
+    {
+        if (menu.Submenu != null && menu.Submenu.Any())
+        {
+            <li class="dropdown">
+                <a class="dropdown-item dropdown-toggle" href="#">@menu.Nome</a>
+                <ul class="dropdown-menu">
+                @Html.Partial("_Submenu", menu.Submenu)
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li><a class="dropdown-item" href='@Url.Action(menu.Acao,menu.Controlador)'>@menu.Nome</a></li>
+        }
+    }
+}
+else
+{
+    <li class="nav-item"><a class="nav-link text-danger" href="#">Nenhum item de menu cadastrado</a></li>
+}

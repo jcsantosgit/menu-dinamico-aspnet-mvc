@@ -1,0 +1,44 @@
+﻿@model ControleMenu.App.Models.MenuViewModel
+
+<h3>Cadatrar Menu</h3>
+
+@using (Html.BeginForm("Cadastrar", "GerenciarMenu"))
+{
+
+    <div class="form-group">
+        <label for="Nome">Nome</label>
+        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Nome, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="Acao">Ação</label>
+        @Html.TextBoxFor(m => m.Acao, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Acao, null, new { @class = "text-danger" })
+        <span class="small text-info">Caso não exista a view, indicar <strong>Index</strong></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Controlador">Controlador</label>
+        @Html.TextBoxFor(m => m.Controlador, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Controlador, null, new { @class = "text-danger" })
+        <span class="small text-info">Caso não exista o controlador, indicar <strong>EmConstrucao</strong></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Controlador">Pai</label>
+        <select name="IdPai" class="form-control">
+            <option value="" selected>Será um menu raiz</option>
+            @foreach (var item in ViewBag.Pais)
+            {
+                <option value="@item.Id">@item.Nome</option>
+            }
+        </select>
+        @Html.ValidationMessageFor(m => m.Controlador, null, new { @class = "text-danger" })
+    </div>
+
+    <div style="text-align:right;width:100%;">
+        <a class="btn btn-default" href='@Url.Action("Index","GerenciarMenu")'>Voltar</a>
+        <button type="submit" class="btn btn-success">Salvar</button>
+    </div>
+}

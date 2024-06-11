@@ -1,0 +1,6 @@
+C:\Users\admin\source\repos\ControleMenu\ControleMenu.Service\bin\Debug\ControleMenu.Service.dll
+C:\Users\admin\source\repos\ControleMenu\ControleMenu.Service\bin\Debug\ControleMenu.Service.pdb
+C:\Users\admin\source\repos\ControleMenu\ControleMenu.Service\obj\Debug\ControleMenu.Service.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\ControleMenu\ControleMenu.Service\obj\Debug\ControleMenu.Service.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\ControleMenu\ControleMenu.Service\obj\Debug\ControleMenu.Service.dll
+C:\Users\admin\source\repos\ControleMenu\ControleMenu.Service\obj\Debug\ControleMenu.Service.pdb
